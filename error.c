@@ -11,7 +11,7 @@
  **/
 char *message_selector(general_t info)
 {
-	int i, n_options;
+	int g, n_options;
 	error_t messages[] = {
 		{_ENOENT, _CODE_ENOENT},
 		{_EACCES, _CODE_EACCES},
@@ -20,9 +20,9 @@ char *message_selector(general_t info)
 	};
 
 	n_options = sizeof(messages) / sizeof(messages[0]);
-	for (i = 0; i < n_options; i++)
-		if (info.error_code == messages[i].code)
-			return (messages[i].message);
+	for (g = 0; g < n_options; g++)
+		if (info.error_code == messages[g].code)
+			return (messages[g].message);
 
 	return ("");
 }
