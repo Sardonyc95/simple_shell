@@ -1,5 +1,5 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef COMMANDS_H
+#define COMMANDS_H
 
 #include <stdlib.h>
 #include <string.h>
@@ -34,4 +34,4 @@ void execute(char *command, char **argus, general_t *infor, char *buff);
 int my_current_directory(char *command, char **argus, char *buff,
 		general_t *infor);
 
-#endif /* COMMAND_H */
+#endif /* COMMANDS_H */
