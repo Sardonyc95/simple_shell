@@ -10,12 +10,12 @@
  **/
 int digits(int n)
 {
-	int i;
+	int q;
 
-	for (i = 0; n != 0; i++, n /= 10)
+	for (q = 0; n != 0; q++, n /= 10)
 		;
 
-	return (i);
+	return (q);
 }
 
 /**
@@ -69,21 +69,21 @@ int is_numerical(unsigned int n)
  */
 int _atoi(char *s)
 {
-	unsigned int number, i;
+	unsigned int number, f;
 	int sign;
 
 	sign = 1;
 	number = 0;
-	for (i = 0; s[i] != '\0'; i++)
+	for (f = 0; s[f] != '\0'; f++)
 	{
-		if (is_numerical(s[i]))
+		if (is_numerical(s[f]))
 		{
-			number = (s[i] - 48)	+ number * 10;
+			number = (s[f] - 48)	+ number * 10;
 
-			if (s[i + 1] == ' ')
+			if (s[f + 1] == ' ')
 				break;
 		}
-		else if (s[i] == '-')
+		else if (s[f] == '-')
 		{
 			sign *= -1;
 		}
@@ -103,9 +103,9 @@ int _atoi(char *s)
  **/
 int contains_letter(char *s)
 {
-	int i;
+	int v;
 
-	for (i = 0; s[i] != '\0'; i++)
+	for (v = 0; s[v] != '\0'; v++)
 	{
 		if (is_numerical(s[i]) == _FALSE)
 			return (_TRUE);

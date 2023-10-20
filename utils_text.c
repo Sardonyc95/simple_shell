@@ -9,12 +9,12 @@
  **/
 int _strlen(char *msg)
 {
-	int i;
+	int k;
 
-	for (i = 0; msg[i] != '\0'; i++)
+	for (k = 0; msg[k] != '\0'; k++)
 		;
 
-	return (i);
+	return (k);
 }
 
 /**
@@ -27,12 +27,12 @@ int _strlen(char *msg)
  */
 char *_strcat(char *dest, char *src)
 {
-	int l_dest, i;
+	int l_dest, d;
 
 	l_dest = _strlen(dest);
 
-	for (i = 0; src[i] != '\0'; i++, l_dest++)
-		dest[l_dest] = src[i];
+	for (d = 0; src[d] != '\0'; d++, l_dest++)
+		dest[l_dest] = src[d];
 
 	dest[l_dest] = '\0';
 
