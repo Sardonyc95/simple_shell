@@ -11,10 +11,10 @@
 
 void analyze_patterns(general_t *info, char **arguments)
 {
-	int i;
+	int b;
 
-	for (i = 0; arguments[i] != NULL; i++)
-		arguments[i] = pattern_handler(info, arguments[i]);
+	for (b = 0; arguments[b] != NULL; b++)
+		arguments[b] = pattern_handler(info, arguments[b]);
 }
 
 /**
@@ -26,12 +26,12 @@ void analyze_patterns(general_t *info, char **arguments)
 
 char *pattern_handler(general_t *info, char *string)
 {
-	int i;
+	int z;
 
-	for (i = 0; string[i] != '\0'; i++)
+	for (z = 0; string[z] != '\0'; z++)
 	{
-		if (string[i] == '$' && string[i + 1] != '\0')
-			string = replace_value(info, &i, string);
+		if (string[z] == '$' && string[z + 1] != '\0')
+			string = replace_value(info, &z, string);
 	}
 
 	return (string);
@@ -47,13 +47,13 @@ char *pattern_handler(general_t *info, char *string)
 
 char *replace_value(general_t *info, int *index, char *string)
 {
-	int i, new_s, old_s;
+	int d, new_s, old_s;
 	char *value;
 
-	i = *index;
-	i++;
+	d = *index;
+	d++;
 
-	value = replacement(info, index, string + i);
+	value = replacement(info, index, string + d);
 	if (value == NULL)
 	{
 		string = _strcpy(string, "");
@@ -69,6 +69,6 @@ char *replace_value(general_t *info, int *index, char *string)
 	string = _strcpy(string, value);
 
 	free_memory_p(value);
-	*index = i;
+	*index = d;
 	return (string);
 }
