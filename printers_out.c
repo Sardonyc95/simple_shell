@@ -4,14 +4,14 @@
 /**
  * _putchar - Print a character to STDOUT
  *
- * @a: Character to print
+ * @c: Character to print
  *
  * Return: On success 1
  * On error -1
  **/
-int _putchar(char a)
+int _putchar(char c)
 {
-	return (write(STDOUT, &a, 1));
+	return (write(STDOUT, &c, 1));
 }
 
 /**
@@ -24,5 +24,5 @@ int _putchar(char a)
  **/
 int print(char *msg)
 {
-	return (print_to_sf(msg, STDOUT));
+	return (print_to_fd(msg, STDOUT));
 }

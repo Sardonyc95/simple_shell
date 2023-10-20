@@ -1,46 +1,46 @@
 #include "memory.h"
 
 /**
- * _reallocate - Reallocates a memory block using malloc and free
+ * _realloc - Reallocates a memory block using malloc and free
  *
- * @pointer: Pointer to the memory previously allocated
+ * @ptr: Pointer to the memory previously allocated
  * @old_size: Size, in bytes, of the allocated space for ptr
  * @new_size: New size, in bytes of the new memory block
  *
  * Return: Memory reallocated
  **/
-void *_reallocate(void *pointer, size_t old_size, size_t new_size)
+void *_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	char *z, *aux;
-	unsigned int b;
+	char *s, *aux;
+	unsigned int a;
 
 	if (new_size == old_size)
-		return (pointer);
+		return (ptr);
 
-	if (pointer == NULL)
+	if (ptr == NULL)
 	{
-		z = malloc(new_size);
-		if (z == NULL)
+		s = malloc(new_size);
+		if (s == NULL)
 			return (NULL);
 
-		return (z);
+		return (s);
 	}
 
-	if (new_size == 0 && pointer != NULL)
+	if (new_size == 0 && ptr != NULL)
 	{
-		free(pointer);
+		free(ptr);
 		return (NULL);
 	}
 
-	z = malloc(new_size);
-	if (z == NULL)
+	s = malloc(new_size);
+	if (s == NULL)
 		return (NULL);
 
-	aux = pointer;
-	for (b = 0; b < old_size; b++)
-		z[b] = aux[b];
+	aux = ptr;
+	for (a = 0; a < old_size; a++)
+		s[a] = aux[a];
 
-	free(pointer);
+	free(ptr);
 
-	return (z);
+	return (s);
 }

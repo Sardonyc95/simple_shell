@@ -1,62 +1,62 @@
-#include "built.h"
+#include "builtins.h"
 #include "general.h"
 
 /**
- * built_exit - Implementation of the exit built
+ * bin_exit - Implementation of the exit builtin
  * Description: Free all the memory used and
  * exit with the last status_code
  *
- * @infor: Information about the shell
- * @argus: Arguments received
+ * @info: Information about the shell
+ * @arguments: Arguments received
  **/
-void built_exit(general_t *infor, char **argus)
+void bin_exit(general_t *info, char **arguments)
 {
 	int status_code, status;
 
 	status = _TRUE;
-	if (argus[1] != NULL)
-		status = number_controller(infor, argus[1]);
+	if (arguments[1] != NULL)
+		status = number_controller(info, arguments[1]);
 
 	if (status == _FALSE)
 		return;
 
-	status_code = infor->status_code;
+	status_code = info->status_code;
 
-	free_memory_pp((void **) argus);
-	free_memory_p((void *) infor->buffer);
-	free_memory_p((void *) infor->environment);
-	free_memory_p((void *) infor);
+	free_memory_pp((void **) arguments);
+	free_memory_p((void *) info->buffer);
+	free_memory_p((void *) info->environment);
+	free_memory_p((void *) info);
 
 	exit(status_code);
 }
 
 /**
- * num_controller - Control the argument of exit
+ * number_controller - Control the argument of exit
  *
- * @infor: General information about the shell
- * @num: Argument of the built
+ * @info: General information about the shell
+ * @number: Argument of the builtin
  *
  * Return: If the actual argument is valid, return _TRUE
  * if not, return _FALSE
  **/
-int num_controller(general_t *infor, char *num)
+int number_controller(general_t *info, char *number)
 {
-	int _num;
+	int _number;
 
-	_num = _atoi(num);
+	_number = _atoi(number);
 
-	if (_num < 0 || contains_letter(num))
+	if (_number < 0 || contains_letter(number))
 	{
-		infor->status_code = 2;
-		infor->error_code = _CODE_ILLEGAL_NUMBER;
-		errors_extra(infor, num);
+		info->status_code = 2;
+		info->error_code = _CODE_ILLEGAL_NUMBER;
+		error_extra(info, number);
 		return (_FALSE);
 	}
 
-	if (_num > 255)
-		infor->status_code = _num % 256;
+	if (_number > 255)
+		info->status_code = _number % 256;
 	else
-		infor->status_code = _num;
+		info->status_code = _number;
 
 	return (_TRUE);
 }

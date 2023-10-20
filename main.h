@@ -7,6 +7,6 @@
 #include "general.h"
 
 /* Entry point of the shell */
-void start(general_t *infor);
+void start(general_t *info);
 
 #endif

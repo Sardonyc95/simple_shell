@@ -1,19 +1,19 @@
-#include "built.h"
+#include "builtins.h"
 
 /**
- * built - Check and execute the builtin
+ * builtins - Check and execute the builtins
  *
- * @infor: Information about the shell
- * @argus: Commands and arguments
+ * @info: Information about the shell
+ * @arguments: Commands and arguments
  *
- * Return: If the command passed is a builtin
+ * Return: If the command passed is a builtins
  * return _TRUE if not return _FALSE
  **/
-int built(general_t *infor, char **argus)
+int builtins(general_t *info, char **arguments)
 {
 	int status;
 
-	status = check_built(infor, argus);
+	status = check_builtin(info, arguments);
 	if (status == _FALSE)
 		return (_FALSE);
 
@@ -22,29 +22,29 @@ int built(general_t *infor, char **argus)
 
 
 /**
- * check_built - Check if the actual command is a builtin_t
+ * check_builtin - Check if the actual command is a builtin_t
  * or not
  *
- * @infor: General information about the shell
- * @argus: Arguments of the command
+ * @info: General information about the shell
+ * @arguments: Arguments of the command
  *
- * Return: If the command is an actual built, return _TRUE
+ * Return: If the command is an actual builtin, return _TRUE
  * if not _FALSE
  **/
-int check_built(general_t *infor, char **argus)
+int check_builtin(general_t *info, char **arguments)
 {
-	int y, size;
-	builtin_t built[] = {
-		{"exit", built_exit},
-		{"env", built_env}
+	int i, size;
+	builtin_t builtins[] = {
+		{"exit", bin_exit},
+		{"env", bin_env}
 	};
 
-	size = sizeof(built) / sizeof(built[0]);
-	for (y = 0; y < size; y++)
+	size = sizeof(builtins) / sizeof(builtins[0]);
+	for (i = 0; i < size; i++)
 	{
-		if (_strcmp(infor->command, built[y].command) == 0)
+		if (_strcmp(info->command, builtins[i].command) == 0)
 		{
-			built[y].func(infor, argus);
+			builtins[i].func(info, arguments);
 			return (_TRUE);
 		}
 	}

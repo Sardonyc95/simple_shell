@@ -1,56 +1,56 @@
-#include "command.h"
-#include "built.h"
+#include "commands.h"
+#include "builtins.h"
 #include "general.h"
 #include "memory.h"
 #include "text.h"
 
 /**
- * analysis - Analyze	the arguments
+ * analyze - Analyze	the arguments
  *
- * @argus: Commands and arguments to execute
- * @infor: General information about the shell
+ * @arguments: Commands and arguments to execute
+ * @info: General information about the shell
  * @buff: Line readed
  **/
-void analysis(char **argus, general_t *infor, char *buff)
+void analyze(char **arguments, general_t *info, char *buff)
 {
-	char *command;
+	char *cmd;
 	int status;
 
-	if (*argus == NULL || argus == NULL)
+	if (*arguments == NULL || arguments == NULL)
 		return;
 
-	command = argus[0];
-	infor->command = command;
-	if (check_built(infor, argus) == _TRUE)
+	cmd = arguments[0];
+	info->command = cmd;
+	if (check_builtin(info, arguments) == _TRUE)
 		return;
 
-	status = is_file(command);
+	status = is_file(cmd);
 	if (status == NON_PERMISSIONS)
 	{
-		infor->status_code = 126;
-		infor->error_code = _CODE_EACCES;
-		error(infor);
+		info->status_code = 126;
+		info->error_code = _CODE_EACCES;
+		error(info);
 		return;
 	}
 
 	if (status == 1)
 	{
-		execute(command, argus, infor, buff);
+		execute(cmd, arguments, info, buff);
 		return;
 	}
 
-	if (current_directory(command, argus, buff, infor) == _TRUE)
+	if (current_directory(cmd, arguments, buff, info) == _TRUE)
 		return;
 
-	infor->value_path = which(command, infor);
-	if (infor->value_path != NULL)
+	info->value_path = which(cmd, info);
+	if (info->value_path != NULL)
 	{
-		execute(infor->value_path, argus, infor, buff);
-		free_memory_p((void *) infor->value_path);
+		execute(info->value_path, arguments, info, buff);
+		free_memory_p((void *) info->value_path);
 		return;
 	}
 
-	infor->status_code = 127;
-	infor->error_code = _CODE_CMD_NOT_EXISTS;
-	error(infor);
+	info->status_code = 127;
+	info->error_code = _CODE_CMD_NOT_EXISTS;
+	error(info);
 }

@@ -10,27 +10,27 @@
 
 int main(int argc, char **argv)
 {
-	general_t *infor;
+	general_t *info;
 	int status_code;
 
-	infor = malloc(sizeof(general_t));
-	if (infor == NULL)
+	info = malloc(sizeof(general_t));
+	if (info == NULL)
 	{
 		perror(argv[0]);
 		exit(1);
 	}
 
-	infor->pid = getpid();
-	infor->status_code = 0;
-	infor->n_commands = 0;
-	infor->argc = argc;
-	infor->argv = argv;
-	infor->mode = isatty(STDIN) == INTERACTIVE;
-	start(infor);
+	info->pid = getpid();
+	info->status_code = 0;
+	info->n_commands = 0;
+	info->argc = argc;
+	info->argv = argv;
+	info->mode = isatty(STDIN) == INTERACTIVE;
+	start(info);
 
-	status_code = infor->status_code;
+	status_code = info->status_code;
 
-	free(infor);
+	free(info);
 
 	return (status_code);
 }

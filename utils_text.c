@@ -27,12 +27,12 @@ int _strlen(char *msg)
  */
 char *_strcat(char *dest, char *src)
 {
-	int l_dest, x;
+	int l_dest, i;
 
 	l_dest = _strlen(dest);
 
-	for (x = 0; src[x] != '\0'; x++, l_dest++)
-		dest[l_dest] = src[x];
+	for (i = 0; src[i] != '\0'; i++, l_dest++)
+		dest[l_dest] = src[i];
 
 	dest[l_dest] = '\0';
 
@@ -49,12 +49,12 @@ char *_strcat(char *dest, char *src)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int p;
+	int i;
 
-	for (p = 0; src[p] != '\0'; p++)
-		dest[p] = src[p];
+	for (i = 0; src[i] != '\0'; i++)
+		dest[i] = src[i];
 
-	dest[p] = '\0';
+	dest[i] = '\0';
 
 	return (dest);
 }
@@ -69,7 +69,7 @@ char *_strcpy(char *dest, char *src)
  **/
 char *_strdup(char *str)
 {
-	int size, s;
+	int size, i;
 	char *dest;
 
 	if (str == NULL)
@@ -80,10 +80,10 @@ char *_strdup(char *str)
 	if (dest == NULL)
 		return (NULL);
 
-	for (s = 0; s < size; s++)
-		*(dest + s) = *(str + s);
+	for (i = 0; i < size; i++)
+		*(dest + i) = *(str + i);
 
-	/* (dest + s) = 0; */
+	/* (dest + i) = 0; */
 
 	return (dest);
 }
@@ -91,19 +91,19 @@ char *_strdup(char *str)
 /**
  * _strcmp - Compare two strings
  *
- * @srg1: String 1
- * @srg2: String 2
+ * @s1: String 1
+ * @s2: String 2
  *
  * Return: Integer
  */
-int _strcmp(char *srg1, char *srg2)
+int _strcmp(char *s1, char *s2)
 {
-	int b;
+	int i;
 
-	for (b = 0; srg1[b] != '\0'; b++)
+	for (i = 0; s1[i] != '\0'; i++)
 	{
-		if (srg1[b] != srg2[b])
-			return (srg1[b] - srg2[b]);
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
 	}
 
 	return (0);

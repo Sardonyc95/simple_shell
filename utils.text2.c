@@ -10,54 +10,54 @@
  **/
 int digits(int n)
 {
-	int m;
+	int i;
 
-	for (m = 0; n != 0; m++, n /= 10)
+	for (i = 0; n != 0; i++, n /= 10)
 		;
 
-	return (m);
+	return (i);
 }
 
 /**
- * to_a_string - Conver @number to string
+ * to_string - Conver @number to string
  *
- * @num: Number to convert
+ * @number: Number to convert
  *
  * Return: Number as string
  **/
-char *to_a_string(int num)
+char *to_string(int number)
 {
 	int n_digits, i;
-	char *_num;
+	char *_number;
 
-	n_digits = digits(num);
-	_num = malloc(n_digits * sizeof(char) + 2);
-	if (num == 0)
+	n_digits = digits(number);
+	_number = malloc(n_digits * sizeof(char) + 2);
+	if (number == 0)
 	{
-		_num[0] = '0';
-		_num[1] = '\0';
-		return (_num);
+		_number[0] = '0';
+		_number[1] = '\0';
+		return (_number);
 	}
 	/* Check NULL */
 
-	_num[n_digits] = '\0';
-	for (i = n_digits - 1; num != 0; num /= 10, i--)
-		_num[i] = (num % 10) + '0';
+	_number[n_digits] = '\0';
+	for (i = n_digits - 1; number != 0; number /= 10, i--)
+		_number[i] = (number % 10) + '0';
 
-	return (_num);
+	return (_number);
 }
 
 
 /**
  * is_numerical - Check if is a digit
  *
- * @m: Number
+ * @n: Number
  *
  * Return: If is a number, return 1 else return 0
  */
-int is_numerical(unsigned int m)
+int is_numerical(unsigned int n)
 {
-	return (m >= '0' && m <= '9');
+	return (n >= '0' && n <= '9');
 }
 
 /**
@@ -69,16 +69,16 @@ int is_numerical(unsigned int m)
  */
 int _atoi(char *s)
 {
-	unsigned int num, i;
+	unsigned int number, i;
 	int sign;
 
 	sign = 1;
-	num = 0;
+	number = 0;
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (is_numerical(s[i]))
 		{
-			num = (s[i] - 48)	+ num * 10;
+			number = (s[i] - 48)	+ number * 10;
 
 			if (s[i + 1] == ' ')
 				break;
@@ -90,24 +90,24 @@ int _atoi(char *s)
 
 	}
 
-	return (num * sign);
+	return (number * sign);
 }
 
 /**
- * contains_my_letter - Search non-digits in a string
+ * contains_letter - Search non-digits in a string
  *
- * @c: String for search
+ * @s: String for search
  *
  * Return: If a non-digits was found, return _TRUE
  * if not, return _FALSE
  **/
-int contains_my_letter(char *c)
+int contains_letter(char *s)
 {
-	int v;
+	int i;
 
-	for (v = 0; c[v] != '\0'; v++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		if (is_numerical(c[v]) == _FALSE)
+		if (is_numerical(s[i]) == _FALSE)
 			return (_TRUE);
 	}
 

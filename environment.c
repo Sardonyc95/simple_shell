@@ -1,4 +1,4 @@
-#include "command.h"
+#include "commands.h"
 #include "general.h"
 #include "text.h"
 #include <string.h>
@@ -8,18 +8,18 @@
 /**
  * _getenv - Get a environment variable
  *
- * @envname: Environment variable to get
+ * @name: Environment variable to get
  *
- * Return: On success value of @envname
+ * Return: On success value of @name
  * On error, NULL
  **/
-char *_getenv(const char *envname)
+char *_getenv(const char *name)
 {
 	char **env;
 	char *aux, *token, *value;
 	int size;
 
-	size = _strlen((char *) envname);
+	size = _strlen((char *) name);
 
 	for (env = environ; *env; ++env)
 	{
@@ -38,7 +38,7 @@ char *_getenv(const char *envname)
 			continue;
 		}
 
-		if (_strcmp((char *) envname, aux) == 0)
+		if (_strcmp((char *) name, aux) == 0)
 		{
 			token = strtok(NULL, "=");
 			value = _strdup(token);
@@ -54,20 +54,20 @@ char *_getenv(const char *envname)
 }
 
 /**
- * what - Find the directory needed
+ * which - Find the directory needed
  *
  * @filename: Command received
- * @infor: General info about the shell
+ * @info: General info about the shell
  *
  * Return: pointer string with found path or NULL in failure.
  */
-char *what(char *filename, general_t *infor)
+char *which(char *filename, general_t *info)
 {
 	char *path, *tmp_path, *token;
 	char *slash;
 	int size;
 
-	(void) infor;
+	(void) info;
 
 	path = _getenv("PATH");
 	if (path == NULL)
@@ -104,20 +104,20 @@ char *what(char *filename, general_t *infor)
 }
 
 /**
- * is_current_path - Check the order of the path
+ * is_current_path -	Check the order of the path
  *
  * @path: PATH to check
- * @infor: General information about the shell
+ * @info: General infor about the shell
  **/
-void is_current_path(char *path, general_t *infor)
+void is_current_path(char *path, general_t *info)
 {
-	infor->is_current_path = _FALSE;
+	info->is_current_path = _FALSE;
 
 	if (path == NULL)
 		return;
 
 	if (path[0] == ':')
-		infor->is_current_path = _TRUE;
+		info->is_current_path = _TRUE;
 }
 
 /**
@@ -126,11 +126,11 @@ void is_current_path(char *path, general_t *infor)
 void get_full_env(void)
 {
 	char **tmp;
-	int a;
+	int i;
 
-	for (a = 0, tmp = environ; tmp[a] != NULL; a++)
+	for (i = 0, tmp = environ; tmp[i] != NULL; i++)
 	{
-		print(tmp[a]);
+		print(tmp[i]);
 		_putchar('\n');
 	}
 }

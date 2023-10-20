@@ -1,15 +1,15 @@
-#include "built.h"
+#include "builtins.h"
 
 /**
- * built_env - Implementation for the env built
+ * bin_env - Implementation for the env builtin
  *
- * @infor: General information about the shell
- * @argus: Command
+ * @info: General information about the shell
+ * @arguments: Command
  **/
-void built_env(general_t *infor, char **argus)
+void bin_env(general_t *info, char **arguments)
 {
-	(void) infor;
-	(void) argus;
+	(void) info;
+	(void) arguments;
 
 	get_full_env();
 }

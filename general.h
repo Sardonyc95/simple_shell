@@ -38,7 +38,7 @@ typedef struct __attribute__((__packed__))
 	int is_current_path;      /* Check if is current path or not */
 	int status_code;          /* Last exit code */
 	char *buffer;             /* Line readed with the getline */
-	char **argus;         /* Line splited into words */
+	char **arguments;         /* Line splited into words */
 	char *environment;        /* Last environment variable get it */
 	int pid;                  /* Process id */
 } general_t;
@@ -52,7 +52,7 @@ typedef struct __attribute__((__packed__))
 typedef struct __attribute__((__packed__))
 {
 	char *command;            /* arguments[0] = cmd */
-	void (*func)(general_t *infor, char **argus);
+	void (*func)(general_t *info, char **arguments);
 } builtin_t;
 
 #endif /* GENERAL_H */

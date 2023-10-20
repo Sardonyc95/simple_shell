@@ -1,4 +1,4 @@
-#include "command.h"
+#include "commands.h"
 #include "general.h"
 #include "memory.h"
 
@@ -6,11 +6,11 @@
  * execute - Execute a command in other process
  *
  * @command: Command to execute
- * @argus: Arguments of the @command
- * @infor: General info about the shell
+ * @arguments: Arguments of the @command
+ * @info: General info about the shell
  * @buff: Line readed
  **/
-void execute(char *command, char **argus, general_t *infor, char *buff)
+void execute(char *command, char **arguments, general_t *info, char *buff)
 {
 	int status;
 	pid_t pid;
@@ -18,18 +18,18 @@ void execute(char *command, char **argus, general_t *infor, char *buff)
 	pid = fork();
 	if (pid == 0)
 	{
-		execve(command, argus, environ);
+		execve(command, arguments, environ);
 		perror("./sh");
 
-		free_memory_pp((void *) argus);
+		free_memory_pp((void *) arguments);
 
-		if (infor->value_path != NULL)
+		if (info->value_path != NULL)
 		{
-			free(infor->value_path);
-			infor->value_path = NULL;
+			free(info->value_path);
+			info->value_path = NULL;
 		}
 
-		free(infor);
+		free(info);
 		free(buff);
 		exit(1);
 	}
@@ -37,30 +37,30 @@ void execute(char *command, char **argus, general_t *infor, char *buff)
 	{
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
-			infor->status_code = WEXITSTATUS(status);
+			info->status_code = WEXITSTATUS(status);
 	}
 }
 
 
 /**
- * my_current_directory - Execute the command if the order require
+ * current_directory - Execute the command if the order require
  *
- * @command: Command to execute
- * @argus: Arguments of the command
+ * @cmd: Command to execute
+ * @arguments: Arguments of the @cmd
  * @buff: Line readed
- * @infor: General info about the shell
+ * @info: General info about the shell
  *
  * Return: Status of the operations
  **/
-int my_current_directory(char *command, char **argus, char *buff, general_t *infor)
+int current_directory(char *cmd, char **arguments, char *buff, general_t *info)
 {
 
-	if (infor->is_current_path == _FALSE)
+	if (info->is_current_path == _FALSE)
 		return (_FALSE);
 
-	if (is_executable(command) == PERMISSIONS)
+	if (is_executable(cmd) == PERMISSIONS)
 	{
-		execute(command, argus, infor, buff);
+		execute(cmd, arguments, info, buff);
 		return (_TRUE);
 	}
 

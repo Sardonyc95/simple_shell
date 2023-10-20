@@ -1,47 +1,47 @@
 #include "general.h"
 #include "text.h"
-#include "command.h"
+#include "commands.h"
 
 /**
  * replacement - Entry point
- * @infor: input
+ * @info: input
  * @index: input
- * @strg: input string
- * Return: strg
+ * @string: input
+ * Return: string
 **/
 
-char *replacement(general_t *infor, int *index, char *strg)
+char *replacement(general_t *info, int *index, char *string)
 {
 	char *tmp;
-	char symb;
+	char symbol;
 
 	(void) index;
 
-	symb = *strg;
-	if (symb != '?' && symb != '$')
+	symbol = *string;
+	if (symbol != '?' && symbol != '$')
 	{
-		tmp = replace_env(infor, strg);
+		tmp = replace_env(info, string);
 		return (tmp);
 	}
 
-	tmp = (symb == '$') ? to_strg(infor->pid) :
-		to_strg(infor->status_code);
+	tmp = (symbol == '$') ? to_string(info->pid) :
+		to_string(info->status_code);
 
 	return (tmp);
 }
 
 /**
  * replace_env - Entry Point
- * @infor: input
+ * @info: input
  * @environment: input
- * Return: strg
+ * Return: string
 **/
 
-char *replace_env(general_t *infor, char *environment)
+char *replace_env(general_t *info, char *environment)
 {
 	char *env;
 
-	(void) infor;
+	(void) info;
 
 	env = _getenv(environment);
 	if (env != NULL)

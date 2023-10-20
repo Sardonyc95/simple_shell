@@ -102,3 +102,4 @@ char *join_words(char *word1, char *word2, char *word3, const char *sep)
 	aux = _strcat(aux, "\n");
 
 	return (aux);
+}

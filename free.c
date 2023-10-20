@@ -3,30 +3,30 @@
 /**
  * free_memory_p - Free a pointer
  *
- * @pointer: Pointer to free
+ * @ptr: Pointer to free
  **/
-void free_memory_p(void *pointer)
+void free_memory_p(void *ptr)
 {
-	if (pointer != NULL)
+	if (ptr != NULL)
 	{
-		free(pointer);
-		pointer = NULL;
+		free(ptr);
+		ptr = NULL;
 	}
 
-	pointer = NULL;
+	ptr = NULL;
 }
 
 /**
  * free_memory_pp - Free a double pointer
  *
- * @pointer: Double pointer to free
+ * @ptr: Double pointer to free
  **/
-void free_memory_pp(void **pointer)
+void free_memory_pp(void **ptr)
 {
-	void **tmps;
+	void **tmp;
 
-	for (tmps = pointer; *tmps != NULL; tmps++)
-		free_memory_p(*tmps);
+	for (tmp = ptr; *tmp != NULL; tmp++)
+		free_memory_p(*tmp);
 
-	free_memory_p(pointer);
+	free_memory_p(ptr);
 }

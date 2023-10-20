@@ -1,74 +1,74 @@
-#include "command.h"
+#include "commands.h"
 #include "general.h"
 #include "memory.h"
 #include "text.h"
 
 /**
  * analyze_patterns - Entry Point
- * @infor: input
- * @argus: input
+ * @info: input
+ * @arguments: input
 **/
 
-void analyze_patterns(general_t *infor, char **argus)
+void analyze_patterns(general_t *info, char **arguments)
 {
-	int x;
+	int i;
 
-	for (x = 0; argus[x] != NULL; x++)
-		argus[x] = pattern_handler(infor, argus[x]);
+	for (i = 0; arguments[i] != NULL; i++)
+		arguments[i] = pattern_handler(info, arguments[i]);
 }
 
 /**
  * pattern_handler - Entry Point
- * @infor: input
- * @strg: input string
- * Return: strg
+ * @info: input
+ * @string: input
+ * Return: string
 **/
 
-char *pattern_handler(general_t *infor, char *strg)
+char *pattern_handler(general_t *info, char *string)
 {
-	int q;
+	int i;
 
-	for (q = 0; strg[q] != '\0'; q++)
+	for (i = 0; string[i] != '\0'; i++)
 	{
-		if (strg[q] == '$' && strg[q + 1] != '\0')
-			strg = replace_value(infor, &q, strg);
+		if (string[i] == '$' && string[i + 1] != '\0')
+			string = replace_value(info, &i, string);
 	}
 
-	return (strg);
+	return (string);
 }
 
 /**
  * replace_value - Entry Point
- * @infor: input
+ * @info: input
  * @index: input
- * @strg: input string
- * Return: strg
+ * @string: input
+ * Return: string
 **/
 
-char *replace_value(general_t *infor, int *index, char *strg)
+char *replace_value(general_t *info, int *index, char *string)
 {
-	int n, new_s, old_s;
+	int i, new_s, old_s;
 	char *value;
 
-	n = *index;
-	n++;
+	i = *index;
+	i++;
 
-	value = replacement(infor, index, strg + n);
+	value = replacement(info, index, string + i);
 	if (value == NULL)
 	{
-		strg = _strcpy(strg, "");
+		string = _strcpy(string, "");
 
-		return (strg);
+		return (string);
 		;
 	}
 
-	old_s = _strlen(strg);
+	old_s = _strlen(string);
 	new_s = _strlen(value) + 1;
 
-	strg = _reallocate(strg, old_s, new_s);
-	strg = _strcpy(strg, value);
+	string = _realloc(string, old_s, new_s);
+	string = _strcpy(string, value);
 
 	free_memory_p(value);
-	*index = n;
-	return (strg);
+	*index = i;
+	return (string);
 }

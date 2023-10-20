@@ -1,13 +1,13 @@
 #include "text.h"
 
 /**
- * print_error - Print a message to STDERR
+ * print_err - Print a message to STDERR
  *
  * @msg: Message to print
  *
  * Return: Number of bytes printed
  **/
-int print_error(char *msg)
+int print_err(char *msg)
 {
-	return (print_to_sf(msg, STDERR));
+	return (print_to_fd(msg, STDERR));
 }

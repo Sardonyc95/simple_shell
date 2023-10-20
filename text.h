@@ -10,9 +10,9 @@
 #include "memory.h"
 
 /* text.c */
-void start_my_prompt(general_t *infor);
-void prompt(general_t *infor);
-char *read_my_prompt();
+void start_prompt(general_t *info);
+void prompt(general_t *info);
+char *read_prompt();
 void sigintHandler(int sig_num);
 
 /* utils_text.c */
@@ -20,24 +20,24 @@ int _strlen(char *msg);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 char *_strdup(char *str);
-int _strcmp(char *srg1, char *srg2);
+int _strcmp(char *str1, char *str2);
 
 /* utils_text2.c */
-char *to_my_string(int num);
+char *to_string(int number);
 int is_numerical(unsigned int n);
 int _atoi(char *s);
-int contains_my_letter(char *c);
+int contains_letter(char *s);
 
 /* printers.c */
-int _putchar_to_sf(char c, int sf);
-int print_to_sf(char *msg, int sf);
+int _putchar_to_fd(char l, int fd);
+int print_to_fd(char *msg, int fd);
 
 /* printers_out.c */
-int _putchar(char a);
+int _putchar(char c);
 int print(char *msg);
 
-/* printers_error.c */
-int print_error(char *msg);
+/* printers_err.c */
+int print_err(char *msg);
 
 /* tokenization.c */
 char **split_words(char *line, const char *sep);
